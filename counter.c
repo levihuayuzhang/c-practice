@@ -15,7 +15,6 @@ void* funcA_num(void* arg) {
         number = cur;
         printf("A ===id = %lu, number = %d\n", pthread_self(), number);
         pthread_mutex_unlock(&mtx);
-        // usleep(10);
     }
 
     return NULL;
