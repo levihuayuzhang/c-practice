@@ -8,15 +8,15 @@
 // const int NUMBER = 2;
 #define NUMBER 2
 
-typedef struct Task
+typedef struct Task<T>
 {
     void (*function)(void *arg);
     void *arg;
-} Task;
+} Task<T>;
 
-struct ThreadPool
+struct ThreadPool<T>
 {
-    Task *taskQ;
+    Task<T> *taskQ;
     int queueCapacity;
     int queueSize;
     int queueFront;
@@ -39,9 +39,9 @@ struct ThreadPool
     int shutDown; // 1 for yes (shutdown)
 };
 
-ThreadPool *ThreadPoolCreate(int min, int max, int queueSize)
+ThreadPool<T> *ThreadPoolCreate(int min, int max, int queueSize)
 {
-    ThreadPool *pool = (ThreadPool *)malloc(sizeof(ThreadPool));
+    ThreadPool<T> *pool = (ThreadPool<T> *)malloc(sizeof(ThreadPool<T>));
     do
     {
 
@@ -76,7 +76,7 @@ ThreadPool *ThreadPoolCreate(int min, int max, int queueSize)
         }
 
         pool->queueCapacity = queueSize;
-        pool->taskQ = (Task *)malloc(sizeof(Task) * queueSize);
+        pool->taskQ = (Task<T> *)malloc(sizeof(Task<T>) * queueSize);
         pool->queueSize = 0; // current task number
         pool->queueFront = 0;
         pool->queueRear = 0;
@@ -101,7 +101,7 @@ ThreadPool *ThreadPoolCreate(int min, int max, int queueSize)
     return NULL;
 }
 
-void threadPoolAdd(ThreadPool *pool, void (*func)(void *arg), void *arg)
+void threadPoolAdd(ThreadPool<T> *pool, void (*func)(void *arg), void *arg)
 {
     pthread_mutex_lock(&pool->mtxThreadPool);
     while(pool->queueSize == pool->queueCapacity && !pool->shutDown)
@@ -124,7 +124,7 @@ void threadPoolAdd(ThreadPool *pool, void (*func)(void *arg), void *arg)
 
 }
 
-int threadPoolDestroy(ThreadPool *pool)
+int threadPoolDestroy(ThreadPool<T> *pool)
 {
     if (pool == NULL) return -1;
     pool->shutDown = 1;
@@ -148,7 +148,7 @@ int threadPoolDestroy(ThreadPool *pool)
     return 0;
 }
 
-int threadPoolBusyNum(ThreadPool *pool)
+int threadPoolBusyNum(ThreadPool<T> *pool)
 {
     pthread_mutex_lock(&pool->mtxBusy);
     int busyNum = pool->busyNum;
@@ -156,7 +156,7 @@ int threadPoolBusyNum(ThreadPool *pool)
     return busyNum;
 }
 
-int threadPoolAliveNum(ThreadPool *pool)
+int threadPoolAliveNum(ThreadPool<T> *pool)
 {
     pthread_mutex_lock(&pool->mtxThreadPool);
     int aliveNum = pool->liveNum;
@@ -166,7 +166,7 @@ int threadPoolAliveNum(ThreadPool *pool)
 
 void *worker(void *arg)
 {
-    ThreadPool *pool = (ThreadPool *)arg;
+    ThreadPool<T> *pool = (ThreadPool<T> *)arg;
     while (1)
     {
         pthread_mutex_lock(&pool->mtxThreadPool);
@@ -194,7 +194,7 @@ void *worker(void *arg)
         }
 
         // get task
-        Task task;
+        Task<T> task;
         task.function = pool->taskQ[pool->queueFront].function;
         task.arg = pool->taskQ[pool->queueFront].arg;
 
@@ -222,7 +222,7 @@ void *worker(void *arg)
 
 void *manager(void *arg)
 {
-    ThreadPool *pool = (ThreadPool *)arg;
+    ThreadPool<T> *pool = (ThreadPool<T> *)arg;
     while (!pool->shutDown)
     {
         sleep(3);
@@ -269,7 +269,7 @@ void *manager(void *arg)
     return NULL;
 }
 
-void *threadExit(ThreadPool *pool)
+void *threadExit(ThreadPool<T> *pool)
 {
     pthread_t tid = pthread_self();
     for (int i = 0; i < pool->maxNum; ++i)

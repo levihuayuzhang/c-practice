@@ -13,7 +13,7 @@ void taskFunc(void *arg)
 
 int main(int argc, char const *argv[])
 {
-    ThreadPool *pool= ThreadPoolCreate(3, 10, 100);
+    ThreadPool<T> *pool= ThreadPoolCreate(3, 10, 100);
     for (int i = 0; i < 100; ++i)
     {
         int *num = (int *)malloc(sizeof(int));
