@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <iostream>
 #include <pthread.h>
-#include <string.h>
+#include <cstring>
 #include <unistd.h>
 #include <string>
 #include "ThreadPool.h"
@@ -41,7 +41,7 @@ ThreadPool<T>::ThreadPool(int min, int max)
         }
 
         return;
-    } while (0);
+    } while (false);
 
     if (threadIDs)
         delete[] threadIDs;
@@ -97,7 +97,7 @@ int ThreadPool<T>::getAliveNum()
 template <typename T>
 void *ThreadPool<T>::worker(void *arg)
 {
-    ThreadPool<T> *pool = static_cast<ThreadPool<T> *>(arg);
+    auto *pool = static_cast<ThreadPool<T> *>(arg);
     while (true)
     {
         pthread_mutex_lock(&pool->mtxPool);
@@ -129,24 +129,24 @@ void *ThreadPool<T>::worker(void *arg)
         pool->busyNum++;
         pthread_mutex_unlock(&pool->mtxPool);
 
-        std::cout << "Thread " << std::to_string(pthread_self()) << " start working..." << std::endl;
+        std::cout << "Thread " << std::to_string((long long)pthread_self()) << " start working..." << std::endl;
         task.function(task.arg); // (*task.function)(task.arg);
         delete task.arg;
         task.arg = nullptr;
 
-        std::cout << "Thread " << std::to_string(pthread_self()) << " end working..." << std::endl;
+        std::cout << "Thread " << std::to_string((long long)pthread_self()) << " end working..." << std::endl;
         pthread_mutex_lock(&pool->mtxPool);
         pool->busyNum--;
         pthread_mutex_unlock(&pool->mtxPool);
     }
 
-    return NULL;
+    return nullptr;
 }
 
 template <typename T>
 void *ThreadPool<T>::manager(void *arg)
 {
-    ThreadPool<T> *pool = static_cast<ThreadPool<T> *>(arg);
+    auto *pool = static_cast<ThreadPool<T> *>(arg);
     while (!pool->shutDown)
     {
         sleep(3);
@@ -187,7 +187,7 @@ void *ThreadPool<T>::manager(void *arg)
             }
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 template <typename T>
@@ -199,9 +199,9 @@ void ThreadPool<T>::threadExit()
         if (threadIDs[i] == tid)
         {
             threadIDs[i] = 0;
-            std::cout << "threadExit() called: " << std::to_string(pthread_self()) << "exiting..." << std::endl;
+            std::cout << "threadExit() called: " << std::to_string((long long)pthread_self()) << "exiting..." << std::endl;
             break;
         }
     }
-    pthread_exit(NULL);
+    pthread_exit(nullptr);
 }

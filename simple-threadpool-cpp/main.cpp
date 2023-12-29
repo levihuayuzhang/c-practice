@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <pthread.h>
 #include <iostream>
 #include "ThreadPool.h"
@@ -9,7 +9,7 @@
 void taskFunc(void *arg)
 {
     int num = *(int *)arg;
-    std::cout << "Thread " << std::to_string(pthread_self()) << " is working, number = " << num << std::endl;
+    std::cout << "Thread " << std::to_string((long long)pthread_self()) << " is working, number = " << num << std::endl;
     sleep(1);
 }
 
