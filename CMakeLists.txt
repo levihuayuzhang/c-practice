@@ -4,5 +4,7 @@ project(c-practice CXX C)
 SET(CXX_STANDARD C++17)
 SET(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-add_subdirectory(simple-threadpool-cpp)
 add_subdirectory(hello)
+add_subdirectory(simple-threadpool-cpp)
+add_subdirectory(unix-file-io-test)
+add_subdirectory(socket)
