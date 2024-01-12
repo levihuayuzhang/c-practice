@@ -9,7 +9,8 @@
             "macFrameworkPath": [
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
-            "compilerPath": "/usr/bin/clang",
+            // "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/opt/homebrew/opt/llvm/bin/clang",
             "intelliSenseMode": "macos-clang-arm64",
             "configurationProvider": "ms-vscode.cmake-tools",
             "cStandard": "c17",
