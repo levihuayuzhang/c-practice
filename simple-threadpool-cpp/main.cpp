@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 void taskFunc(void *arg) {
-  int num = *(int *)arg;
+  int num = *static_cast<int *>(arg);
   std::cout << "Thread " << std::to_string((long long)pthread_self())
             << " is working, number = " << num << "\n";
   sleep(1);

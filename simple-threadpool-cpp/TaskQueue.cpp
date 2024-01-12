@@ -3,7 +3,7 @@
 template <typename T>
 TaskQueue<T>::TaskQueue()
 {
-    pthread_mutex_init(&m_mtx, NULL);
+    pthread_mutex_init(&m_mtx, nullptr);
 }
 
 template <typename T>

@@ -1,10 +1,10 @@
+#include "ThreadPool.h"
 #include <cstddef>
+#include <cstring>
 #include <iostream>
 #include <pthread.h>
-#include <cstring>
-#include <unistd.h>
 #include <string>
-#include "ThreadPool.h"
+#include <unistd.h>
 
 template <typename T>
 ThreadPool<T>::ThreadPool(int min, int max)
@@ -59,8 +59,8 @@ ThreadPool<T>::~ThreadPool()
         pthread_cond_signal(&notEmpty);
     }
 
-    if (taskQ) delete(taskQ);
-    if (threadIDs) delete(threadIDs);
+     delete(taskQ);
+     delete(threadIDs);
 
     pthread_mutex_destroy(&mtxPool);
     pthread_cond_destroy(&notEmpty);

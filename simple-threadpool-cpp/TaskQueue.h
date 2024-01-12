@@ -28,7 +28,7 @@ class TaskQueue
 {
 private:
     pthread_mutex_t m_mtx;
-    std::queue<Task<T>> m_taskQ;
+    std::queue< Task<T> > m_taskQ;
 
 public:
     TaskQueue<T>();

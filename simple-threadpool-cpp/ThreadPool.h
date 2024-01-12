@@ -18,7 +18,6 @@ private:
     static void* manager(void* arg);
     void threadExit();
 
-private:
     TaskQueue<T>* taskQ;
     static const int NUMBER = 2;
 

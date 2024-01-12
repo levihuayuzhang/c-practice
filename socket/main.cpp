@@ -1,8 +1,10 @@
-#include <iostream>
 #include <arpa/inet.h>
-// #include <sys/socket.h>
+#include <iostream>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 
-int main(int argc, const char *argv[]) 
-{ 
-    std::cout << "this is socket\n"; 
+auto main(int argc, const char *argv[]) -> int {
+  std::cout << "this is socket\n"; 
+  struct sockaddr_in aaa{};
 }
