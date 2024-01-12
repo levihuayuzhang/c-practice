@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        // https://github.com/vadimcn/codelldb/blob/master/MANUAL.md
+        { // press F5
+            "type": "lldb", // with codelldb
+            "request": "launch",
+            "name": "lldb",
+            "program": "${command:cmake.launchTargetPath}", // https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-settings.md#command-substitution
+            "args": [],
+            "cwd": "${command:cmake.launchTargetDirectory}",
+        },
+        // seems not work on Mac with apple silicon (but can use cmake debug button without this config) https://gist.github.com/levihuayuzhang/ea821f903913c438049e223e04e6f18d
+        // { // https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/debug-launch.md
+        //     "name": "ms-cpp-tool",
+        //     "type": "cppdbg", // witht ms cpp tool
+        //     "request": "launch",
+        //     // Resolved by CMake Tools:
+        //     "program": "${command:cmake.launchTargetPath}",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}",
+        //     "environment": [
+        //         {
+        //             // add the directory where our target was built to the PATHs
+        //             // it gets resolved by CMake Tools:
+        //             "name": "PATH",
+        //             "value": "${env:PATH}:${command:cmake.getLaunchTargetDirectory}"
+        //         },
+        //     ],
+        //     // "console": "externalTerminal",
+        //     "MIMode": "lldb"
+        // }
+    ]
+}
