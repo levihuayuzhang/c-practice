@@ -1,0 +1,25 @@
+# https://clangd.llvm.org/config
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      [
+        clang-analyzer-*,
+        cppcoreguidelines-*,
+        bugprone-*,
+        performance-*,
+        modernize-*,
+        portability-*,
+        readability-*',
+        cert-*,
+        llvm-*,
+        google-*,
+      ]
+    Remove:
+      [
+        modernize-use-trailing-return-type,
+        cppcoreguidelines-avoid-magic-numbers,
+      ]
+    CheckOptions:
+      WarnOnFloatingPointNarrowingConversion: false
+    
