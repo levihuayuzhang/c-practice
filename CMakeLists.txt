@@ -52,6 +52,7 @@ include_directories(${LLVM_INCLUDE_DIRS})
 # add_compile_options()
 
 add_subdirectory(hello)
+# add_subdirectory(simple-threadpool-c)
 add_subdirectory(simple-threadpool-cpp)
 add_subdirectory(unix-file-io-test)
 add_subdirectory(socket)

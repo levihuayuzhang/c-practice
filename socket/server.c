@@ -44,7 +44,7 @@ int main(int argc, const char *argv[]) {
   }
 
   int max = sizeof(infos) / sizeof(infos[0]);
-  for (int i = 0;  i < max; ++i) {
+  for (int i = 0; i < max; ++i) {
     memset(&infos[i], 0, sizeof(infos[i]));
     infos[i].fd = -1; // mark to indicate: has not been used
   }
@@ -75,7 +75,7 @@ int main(int argc, const char *argv[]) {
 }
 
 void *working(void *arg) {
-  struct SockInfo *pinfo = (struct SockInfo *) arg;
+  struct SockInfo *pinfo = (struct SockInfo *)arg;
 
   char ip[32];
   printf("Client IP %s, port %d\n",

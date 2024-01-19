@@ -1,2 +1,0 @@
-Checks: 'clang-diagnostic-,*clang-analyzer-*,bugprone-*,modernize-*,performance-*,portability-*,readability-*,cert-*,cppcoreguidelines-*,google-*,llvm-*'
-FormatStyle:  llvm
