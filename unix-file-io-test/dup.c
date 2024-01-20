@@ -6,8 +6,9 @@
 
 int main()
 {
-    int fd = open("../../unix-file-io-test//abc.txt", O_RDWR|O_CREAT, 0664);
-    if (fd == -1){
+    int fd = open("../../unix-file-io-test//abc.txt", O_RDWR | O_CREAT, 0664);
+    if (fd == -1)
+    {
         perror("open");
         exit(0);
     }
@@ -16,14 +17,14 @@ int main()
     const char *pt = "Hello World...";
     write(fd, pt, strlen(pt)); // file cursor is at end of file
 
-   int newfd = dup(fd);
-   printf("newfd: %d\n", newfd);
+    int newfd = dup(fd);
+    printf("newfd: %d\n", newfd);
 
-   close(fd);
+    close(fd);
 
-   const char *newpt = "holy shit!!!!!!";
-   write(newfd, newpt, strlen(newpt));
-   close(newfd);
+    const char *newpt = "holy shit!!!!!!";
+    write(newfd, newpt, strlen(newpt));
+    close(newfd);
 
-   return 0;
+    return 0;
 }

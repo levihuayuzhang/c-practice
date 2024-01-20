@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "iostream": "cpp",
-    "socket.h": "c"
+    "socket.h": "c",
+    "unistd.h": "c"
   }
 }

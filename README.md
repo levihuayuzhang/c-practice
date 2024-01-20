@@ -8,5 +8,3 @@
 
 Todo:
 1. port to c++11 (standard thread library)
-
-using Clang, clangd, clang-tidy

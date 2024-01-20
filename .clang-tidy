@@ -20,4 +20,4 @@ Checks: >
     -misc-const-correctness,
     -misc-non-private-member-variables-in-classes,
     -misc-no-recursion,
-FormatStyle: llvm 
+/* FormatStyle: llvm  */
